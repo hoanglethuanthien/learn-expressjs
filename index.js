@@ -1,28 +1,40 @@
 const express = require('express');
 const app = express();
-let port = 3000;
+var bodyParser = require('body-parser');
+const low = require('lowdb');
+const FileSync = require('lowdb/adapters/FileSync');
+const adapter = new FileSync('db.json');
+const db = low(adapter)
 
-let users = [
-		{ id: 1, name: 'Thien'},
-		{ id: 2, name: 'Hong'},
-		]
+// Set some defaults (required if your JSON file is empty)
+db.defaults({ users: [] })
+  .write();
+
+let port = process.env.PORT || 3001;
+
 app.set('view engine', 'pug');
 app.set('views', './views');
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }))
+ 
+// parse application/json
+app.use(bodyParser.json())
 
 app.get('/', function(req, res) {
 	res.render('index', {
-		name: 'THien'
+		name: 'Thien'
 	});
 });
 
 app.get('/users', function(req, res) {
 	res.render('users/index', {
-		users: users,
+		users: db.get('users').value()
 	});
 })
 
 app.get('/users/search', function(req, res){
 	let q = req.query.q;
+	let users = db.get('users').value();
 	let matchedUsers = users.filter(function(user){
 		return user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
 	});
@@ -31,7 +43,17 @@ app.get('/users/search', function(req, res){
 	});
 
 })
-app.listen(3000, function () {
+
+app.get('/users/create', function(req, res){
+	res.render('users/create');
+})
+
+app.post('/users/create', function(req, res){
+	db.get('users').push(req.body).write() ;
+	res.redirect('/users')
+})
+
+app.listen(port, function () {
 	console.log('Example app listening on port ' + port);
 }) 
 
