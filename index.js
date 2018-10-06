@@ -4,7 +4,8 @@ var bodyParser = require('body-parser');
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
 const adapter = new FileSync('db.json');
-const db = low(adapter)
+const db = low(adapter);
+const shortid = require('shortid');
 
 // Set some defaults (required if your JSON file is empty)
 db.defaults({ users: [] })
@@ -49,10 +50,18 @@ app.get('/users/create', function(req, res){
 })
 
 app.post('/users/create', function(req, res){
+	req.body.id = shortid.generate();
 	db.get('users').push(req.body).write() ;
 	res.redirect('/users')
 })
 
+app.get('/users/:id', function(req, res){
+	let id = parseInt(req.params.id);
+	let user = db.get('users').find({id: id}).value() ;
+	res.render('users/view', {
+		user: user
+	})
+})
 app.listen(port, function () {
 	console.log('Example app listening on port ' + port);
 }) 
