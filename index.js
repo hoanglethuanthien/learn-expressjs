@@ -56,7 +56,7 @@ app.post('/users/create', function(req, res){
 })
 
 app.get('/users/:id', function(req, res){
-	let id = parseInt(req.params.id);
+	let id = req.params.id;
 	let user = db.get('users').find({id: id}).value() ;
 	res.render('users/view', {
 		user: user
