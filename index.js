@@ -17,6 +17,7 @@ app.get('/', function(req, res) {
 		name: 'Thien'
 	});
 });
+app.use(express.static('public'));
 
 app.use('/users', userRouter)
 
