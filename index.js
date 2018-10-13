@@ -1,6 +1,6 @@
 const express = require('express');
 var bodyParser = require('body-parser');
-var userRoutes = require('./routes/user.route');
+var userRouter = require('./routes/user.route');
 let port = process.env.PORT || 3001;
 const app = express();
 app.set('view engine', 'pug');
@@ -17,8 +17,10 @@ app.get('/', function(req, res) {
 		name: 'Thien'
 	});
 });
+app.use(express.static('public'));
 
-app.use('/users', userRoutes);
+app.use('/users', userRouter)
+
 app.listen(port, function () {
 	console.log('Example app listening on port ' + port);
 }) 
