@@ -2,11 +2,16 @@ extends ../layouts/common
 
 block content
     h1 Create User
+
+    if errs
+        each err in errs
+            .alert.alert-danger= err
+
     form(action='/users/create', method='POST')
         .form-group
             label(for="name") Name
-            input#name.form-control(name='name', type='text')
+            input#name.form-control(name='name',  value= template ? template.name: "")
         .form-group
             label(for="phone") Phone
-            input#phone.form-control(name='phone', type='text')
+            input#phone.form-control(name='phone', value= template ? template.phone: "")
         button.btn.btn-primary create
