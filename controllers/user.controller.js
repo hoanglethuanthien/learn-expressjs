@@ -24,22 +24,7 @@ module.exports.create = function (req, res) {
 module.exports.postCreate = function (req, res) {
 	req.body.id = shortid.generate();
 
-	let errs = [];
-	if (!req.body.name) {
-		errs.push('Name is required!')
-	}
-
-	if (!req.body.phone) {
-		errs.push('Phone is required!')
-	}
-
-	if (errs.length) {
-		res.render('users/create', {
-			errs: errs,
-			values: req.body,
-		});
-		return;
-	}
+	
 	db.get('users').push(req.body).write();
 	res.redirect('/users');
 
