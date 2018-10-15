@@ -36,7 +36,7 @@ module.exports.postCreate = function (req, res) {
 	if (errs.length) {
 		res.render('users/create', {
 			errs: errs,
-			template: req.body,
+			values: req.body,
 		});
 		return;
 	}
