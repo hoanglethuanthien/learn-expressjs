@@ -1,5 +1,6 @@
 const express = require('express');
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
 var userRouter = require('./routes/user.route');
 let port = process.env.PORT || 3001;
 const app = express();
@@ -11,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
  
 // parse application/json
 app.use(bodyParser.json())
-
+app.use(cookieParser());
 app.get('/', function(req, res) {
 	res.render('index', {
 		name: 'Thien'
