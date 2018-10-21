@@ -2,7 +2,10 @@
   "users": [
     {
       "name": "Thien",
-      "id": "yFm-Yub5S"
+      "id": "yFm-Yub5S",
+      "phone": "0339605436",
+      "email": "hoanglethuanthien@gmail.com",
+      "password": "123456"
     },
     {
       "name": "Hồng",
