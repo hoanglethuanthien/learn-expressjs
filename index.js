@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
  
 // parse application/json
 app.use(bodyParser.json())
-app.use(cookieParser());
+app.use(cookieParser('asdf53234dfjklhk'));
 app.get('/', function(req, res) {
 	res.render('index', {
 		name: 'Thien'
