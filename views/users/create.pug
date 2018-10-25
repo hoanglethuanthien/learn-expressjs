@@ -10,8 +10,11 @@ block content
     form(action='/users/create', method='POST')
         .form-group
             label(for="name") Name
-            input#name.form-control(name='name',  value= values ? values.name: "")
+            input#name.form-control(name='name', type='text', value= values ? values.name: "")
         .form-group
             label(for="phone") Phone
-            input#phone.form-control(name='phone', value= values ? values.phone: "")
+            input#phone.form-control(name='phone',  type='text', value= values ? values.phone: "")
+        .form-group
+            label(for="avatar") Avatar
+            input#avatar.form-control-file(name='avatar', type='file' value= values ? values.avatar: "")
         button.btn.btn-primary create
