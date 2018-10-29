@@ -7,7 +7,7 @@ block content
         each err in errs
             .alert.alert-danger= err
 
-    form(action='/users/create', method='POST')
+    form(action='/users/create', method='POST', enctype="multipart/form-data")
         .form-group
             label(for="name") Name
             input#name.form-control(name='name', type='text', value= values ? values.name: "")

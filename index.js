@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var userRoute = require('./routes/user.route');
 var authRoute = require('./routes/auth.route');
-
+var productRoute = require('./routes/product.route');
 var authMiddleware = require('./middlewares/auth.middleware');
 
 let port = process.env.PORT || 3001;
@@ -28,6 +28,7 @@ app.use(express.static('public'));
 
 app.use('/auth', authRoute);
 app.use('/users', authMiddleware.requireAuth, userRoute);
+app.use('/products',authMiddleware.requireAuth, productRoute )
 
 app.listen(port, function () {
 	console.log('Example app listening on port ' + port);

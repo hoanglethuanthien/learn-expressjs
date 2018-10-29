@@ -20,7 +20,8 @@ router.get('/create', controller.create);
 router.post('/create',
     upload.single('avatar'),
     validate.postCreate,
-    controller.postCreate);
+    controller.postCreate
+);
 
 router.get('/:id', controller.get);
 
