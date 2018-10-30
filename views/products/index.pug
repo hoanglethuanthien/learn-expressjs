@@ -1,0 +1,11 @@
+extends ../layouts/common
+block content
+    h1 Products
+    
+    table.table
+        tr
+            th  Stt
+        each product in products
+            tr
+                td    
+                    img(src=product.image , alt="")

@@ -1,7 +1,9 @@
 var db = require('../db');
 
 module.exports.index = function(req, res){
-    res.render('product', {
-        product: db.get('product').value(),
+
+    var products = db.get('products').value();
+    res.render('products', {
+        products: products,
     })
 }
