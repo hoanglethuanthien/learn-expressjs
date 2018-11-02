@@ -2,9 +2,12 @@ require('dotenv').config();
 const express = require('express');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
+
 var userRoute = require('./routes/user.route');
 var authRoute = require('./routes/auth.route');
 var productRoute = require('./routes/product.route');
+var cartRoute = require('./routes/cart.route');
+
 var authMiddleware = require('./middlewares/auth.middleware');
 var sessionMiddlewar = require('./middlewares/session.middleware');
 let port = process.env.PORT || 3001;
@@ -29,7 +32,8 @@ app.use(express.static('public'));
 
 app.use('/auth', authRoute);
 app.use('/users', authMiddleware.requireAuth, userRoute);
-app.use('/products', productRoute )
+app.use('/products', productRoute );
+app.use('/cart', cartRoute);
 
 app.listen(port, function () {
 	console.log('Example app listening on port ' + port);
