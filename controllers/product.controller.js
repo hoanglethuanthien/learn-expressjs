@@ -11,3 +11,14 @@ module.exports.index = function(req, res){
         products: products,
     })
 }
+
+module.exports.search= function (req, res) {
+	let q = req.query.q;
+	let products = db.get('products').value();
+	let matchedProducts = products.filter(function (product) {
+		return product.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
+	});
+	res.render('products/index', {
+		products: matchedProducts,
+	});
+}
